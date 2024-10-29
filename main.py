@@ -33,13 +33,13 @@ resources = {
 }
 
 remake = True
+print(f"MACHINE RES. START: {resources}")
 
-
-# Loop through and access to the item I need like espresso.water
+# Loop through and access to the item I need like espresso water
 def ingredients(drink):
     """will find requirements for the drink chosen"""
     if drink in MENU:   # menu dictionary
-        require = MENU[drink]  # required items to make the drink
+        require = MENU[drink]  # require is the items to make the drink from MENU
         ingredient = require["ingredients"]   # access ingredients
         cost = require["cost"]     # access cost
 
@@ -53,12 +53,16 @@ def ingredients(drink):
         # check if resources are sufficient
         sufficient = True
         for item, amount in required_ingredients:
+            print(f"RESOURCES in the machine: {resources}") # SELF CHECK
             missing_items = []
             if resources[item] < amount:
                 sufficient = False     # Let User know about missing ingredient
                 missing_items.append(item)
                 print(f"Sorry we don't have enough {missing_items} to make Your {drink}")
                 return
+            elif resources[item] >= amount:
+                resources[item] -= amount
+                print(f"RESOURCES AFTER DRINK: {resources}") # SELF CHECK
 
     print(f"Ingredients for {drink}: {ingredient}\n"
           f"{drink} is: ${cost}\n"
@@ -92,9 +96,7 @@ def ingredients(drink):
     else:
         print("OK, Bye!")
 
-
 user_choice = input("What would you like? (espresso/latte/cappuccino): ")
-
 
 if user_choice == "espresso":
     ingredients("espresso")
