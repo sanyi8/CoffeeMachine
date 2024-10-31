@@ -123,10 +123,3 @@ elif user_choice == "cappuccino":
 ## if not enough money refund
 ## if enough Make calculate change based on selected drink
 ## + deduct the resources
-
-
-
-
-
-
-
